@@ -47,7 +47,6 @@ class OpenAIGymEnvironment(Environment):
     ):
         """
         Creates an OpenAIGymEnvironment object.
-
         :param gymenv: String identifier for desired environment.
         :param epsilon: Fraction of the time the agent should select a random
             action during training.
@@ -81,7 +80,6 @@ class OpenAIGymEnvironment(Environment):
         Creates a gym environment object and checks if it is supported. We
         support environments that supply Box(x, ) state representations and
         require Discrete(y) or Box(y,) action inputs.
-
         :param gymenv: String identifier for desired environment.
         """
         if gymenv not in [e.id for e in gym.envs.registry.all()]:
@@ -160,7 +158,6 @@ class OpenAIGymEnvironment(Environment):
     ) -> Tuple[np.ndarray, float]:
         """
         Selects the next action.
-
         :param predictor: RLPredictor/GymPredictor object whose policy to
             follow. If set to None, use a random policy.
         :param next_state: State to evaluate predictor's policy on.
@@ -282,7 +279,6 @@ class OpenAIGymEnvironment(Environment):
         """
         Runs an episode of the environment n times and returns the average
         sum of rewards.
-
         :param n: Number of episodes to average over.
         :param predictor: RLPredictor/GymPredictor object whose policy to
             follow. If set to None, use a random policy
@@ -338,7 +334,6 @@ class OpenAIGymEnvironment(Environment):
         """
         Runs an episode of the environment and returns the sum of rewards
         experienced in the episode. For evaluation purposes.
-
         :param predictor: RLPredictor/GymPredictor object whose policy to
             follow. If set to None, use a random policy.
         :param max_steps: Max number of timesteps before ending episode.
