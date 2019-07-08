@@ -146,10 +146,16 @@ class OpenAIGymEnvironment(Environment):
         )
 
     def reset(self):
-        return self.env.reset()
+        res = self.env.reset()
+        if self.action_type == EnvType.DISCRETE_ACTION:
+            self.action_dim = self.env.action_space.n
+        return res
 
     def step(self, action):
-        return self.env.step(action)
+        res = self.env.step(action)
+        if self.action_type == EnvType.DISCRETE_ACTION:
+            self.action_dim = self.env.action_space.n
+        return res
 
     def policy(
         self,
