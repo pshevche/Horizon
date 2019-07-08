@@ -170,9 +170,6 @@ class OpenAIGymEnvironment(Environment):
             noise to action outputs.
         :param state_preprocessor: State preprocessor to use to preprocess states
         """
-        if self.action_type == EnvType.DISCRETE_ACTION:
-            self.action_dim = self.action_space.n
-            predictor.action_dim = self.action_dim
         if predictor is None or (
             not test
             and self.action_type == EnvType.DISCRETE_ACTION
@@ -200,8 +197,7 @@ class OpenAIGymEnvironment(Environment):
                 action_idx = predictor.policy(next_state)[1]
             else:
                 action_idx = predictor.policy(next_state)[0]
-            if action_idx < action.size:
-                action[action_idx] = 1.0
+            action[action_idx] = 1.0
             return action, action_probability
         elif isinstance(predictor, GymDDPGPredictor):
             # FIXME: need to calculate action probability properly
